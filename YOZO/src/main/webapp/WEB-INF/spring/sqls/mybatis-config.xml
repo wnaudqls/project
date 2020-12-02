@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	<typeAliases>
+		<!-- <typeAlias type="com.minibean.timewizard.model.dto.AdminDto" alias="AdminDto"/>
+		<typeAlias type="com.yori.zori.model.dto.CalDto" alias="CalDto"/>
+		<typeAlias type="com.yori.zori.model.dto.CartDTO" alias="CartDTO"/>
+		<typeAlias type="com.yori.zori.model.dto.MapDto" alias="MapDto"/> -->
+		
+		<typeAlias type="com.yori.zori.model.dto.LikeDto" alias="likedto"/>
+		<typeAlias type="com.yori.zori.model.dto.GoodsDto" alias="goodsDto"/>
+		<typeAlias type="com.yori.zori.model.dto.BroadcastDto" alias="broadcastdto"/>
+		<typeAlias type="com.yori.zori.model.dto.AnswerDto" alias="answerDto"/>
+		<typeAlias type="com.yori.zori.model.dto.MemberDto" alias="memberDto"/> 
+		<typeAlias type="com.yori.zori.model.dto.RecipeDto" alias="recipeDto"/> 
+		<typeAlias type="com.yori.zori.model.dto.RecipereDto" alias="recipereDto"/> 
+		<!-- <typeAlias type="com.yori.zori.model.dto.CartDto" alias="cartDto"/>  -->
+	</typeAliases>
+	<mappers>
+
+	
+		<mapper resource="/mybatis/like-mapper.xml" />
+		<mapper resource="/mybatis/admin-mapper.xml"/>
+		<mapper resource="/mybatis/recipe-mapper.xml"/>
+		<mapper resource="/mybatis/goods-mapper.xml"/>
+		<mapper resource="/mybatis/mybatis-mapper.xml"/>
+		<!-- <mapper resource="/mybatis/cart-mapper.xml"/> -->
+		
+		
+	</mappers>
+</configuration>

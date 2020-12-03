@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" href="resources/img/yozofavicon.ico"
+<link rel="shortcut icon" href="/YORIZORI/resources/img/yozofavicon.ico"
    type="image/x-icon">
 <title>요리조리</title>
 <style type="text/css">
@@ -220,21 +220,21 @@
 	<input type="hidden"id="member_no" value="${login.member_no }" />
 		<!-- 메인 아이콘, 유저아이콘 -->
 		<img id="mainicon" class="mainlogo finger" alt="logo"
-			src="resources/img/main_icon.png"
+			src="/YORIZORI/resources/img/main_icon.png"
 			onclick="location.href='/YORIZORI/'"><br>
 		<c:choose>
 			<c:when test="${empty login }">
 				<div class="dropuserdown">
 					<span id="loginStatus">로그인을 해주세요</span> <img
 						onclick="location.href='/YORIZORI/login'"
-						class="usericon" alt="logo" src="resources/img/user_icon.png">
+						class="usericon" alt="logo" src="/YORIZORI/resources/img/user_icon.png">
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="dropuserdown">
 					<span id="loginStatus"><b>${login.member_nick }</b> 님이
 						로그인하였습니다.</span> <img onclick="dropuser()" class="usericon" alt="logo"
-						src="resources/img/user_icon.png">
+						src="/YORIZORI/resources/img/user_icon.png">
 					<div id="dropuser_content" class="dropuser_content">
 						<a
 							href="/YORIZORI/update">개인정보수정</a>
@@ -254,10 +254,10 @@
 	<nav id="icon">
 		<img
 			onclick="location.href='/YORIZORI/recipe_list'"
-			class="recipe finger" alt="logo" src="resources/img/recipe_icon.png">
+			class="recipe finger" alt="logo" src="/YORIZORI/resources/img/recipe_icon.png">
 		<div class="dropstreamdown">
 			<img onclick="dropstream()" class="stream finger" alt="logo"
-				src="resources/img/broadcast_icon.png">
+				src="/YORIZORI/resources/img/broadcast_icon.png">
 			<div id="dropstream_content" class="dropstream_content">
 
 				<a href="/YORIZORI/stream" class="useId">방송하기</a>
@@ -267,9 +267,9 @@
 		</div>
 		<!--유정 goods onclick 건들임 -->
 		<img class="goods finger" alt="logo"
-			src="resources/img/goods_icon.png"
+			src="/YORIZORI/resources/img/goods_icon.png"
 			onclick="location.href='/YORIZORI/goodslist'">
-		<img class="map finger" alt="logo" src="resources/img/map_icon.png"
+		<img class="map finger" alt="logo" src="/YORIZORI/resources/img/map_icon.png"
 			onclick="location.href = '/YORIZORI/map'">
 		<c:if test="${login.member_role eq '관리자' }">
 			<img class="admin finger" alt="logo"

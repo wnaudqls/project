@@ -27,9 +27,10 @@ public class BroadcastDaoImpl implements BroadcastDao{
 
 	}
 
-	public BroadcastDto selectone(BroadcastDto dto) {
+	public BroadcastDto selectone(String broadcast_title) {
+		BroadcastDto dto = new BroadcastDto();
 		try {
-			dto = session.selectOne(namespace + "selectOne", dto);
+			dto = session.selectOne(namespace + "selectone", broadcast_title);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

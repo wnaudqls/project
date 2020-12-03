@@ -10,6 +10,10 @@
 		WHERE MEMBER_ID LIKE '%'||#{search}||'%'
 		OR BROADCAST_TITLE LIKE '%'||#{search}||'%'
 	</select>
+	<select id="selectone" resultType="BroadcastDto">
+		SELECT * FROM BROADCAST
+		WHERE BROADCAST_TITLE LIKE #{broadcast_title}
+	</select>
 	<insert id="insert">
 		INSERT INTO BROADCAST VALUES(BROAD_SEQ.NEXTVAL, #{member_id},
 		#{broadcast_title},#{broadcast_maxclient},

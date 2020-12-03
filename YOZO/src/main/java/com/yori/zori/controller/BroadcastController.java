@@ -19,13 +19,20 @@ import com.yori.zori.broadcast.dto.BroadcastDto_Reservation;*/
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yori.zori.model.biz.BroadcastBiz;
 import com.yori.zori.model.biz.BroadcastBizImpl;
 import com.yori.zori.model.dto.BroadcastDto;
+import com.yori.zori.model.dto.ChatDto;
 
 /**
  * Servlet implementation class CalController
@@ -37,12 +44,15 @@ public class BroadcastController {
 	@Autowired
 	BroadcastBiz biz;
 
+	@Autowired
+	private SimpMessagingTemplate template;
+	
 	public BroadcastController() {
 
 	}
 	
 	
-	@RequestMapping("broadcastlist")
+	@RequestMapping("/broadcastlist")
 	@ResponseBody
 	public Map<String, List<BroadcastDto>>broadcast(){
 		Map<String, List<BroadcastDto>> map = new HashMap<String, List<BroadcastDto>>();
@@ -52,6 +62,18 @@ public class BroadcastController {
 			logger.info("broadcastlist 담는중");
 		}
 		return map;
+	}
+	@GetMapping("/broadcast/{broadcast_title}")
+	public String room(@PathVariable("broadcast_title")String broadcast_title, Model model){
+		BroadcastDto dto = biz.selectone(broadcast_title);
+		logger.info("방이름: {}",broadcast_title);
+		model.addAttribute("dto", dto);
+		return "broadcast_room";
+	}
+	@MessageMapping("/chat/join")
+	public void join(ChatDto dto) {
+		logger.info("채팅방 이름:{}\n접속자: {}",dto.getChat_title(), dto.getUser_id());
+		
 	}
 }
 	

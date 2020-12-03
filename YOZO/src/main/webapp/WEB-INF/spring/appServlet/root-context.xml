@@ -33,12 +33,12 @@
 		<constructor-arg ref="sqlSession" />
 	</bean>
 	
-	<bean id="mailSender"
+<!-- 	<bean id="mailSender"
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
+		<property name="host" value="wnaudqls.gmail.com" />
 		<property name="port" value="465" />
-		<property name="username" value="junghb1209@gmail.com" />
-		<property name="password" value="vcldknrxbkkgllzp" />
+		<property name="username" value="wnaudqls12@gmail.com" />
+		<property name="password" value="wnaudqls1022!@" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.transport.protocol">smtp</prop>
@@ -48,6 +48,6 @@
 				<prop key="mail.debug">true</prop>
 			</props>
 		</property>
-	</bean>
+	</bean> -->
 	
 </beans>

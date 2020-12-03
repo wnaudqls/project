@@ -2,7 +2,6 @@ package com.yori.zori.model.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 
 import com.yori.zori.model.dto.BroadcastDto;
 
@@ -11,7 +10,7 @@ public interface BroadcastDao{
 	public List<BroadcastDto> selectList();
 
 
-	public BroadcastDto selectone(BroadcastDto dto);
+	public BroadcastDto selectone(String broadcast_title);
 	public int insert(BroadcastDto dto);
 
 	public int update(BroadcastDto dto);

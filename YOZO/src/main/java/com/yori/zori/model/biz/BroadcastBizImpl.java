@@ -25,9 +25,9 @@ public class BroadcastBizImpl implements BroadcastBiz{
 
 	}
 	@Override
-	public BroadcastDto selectone(BroadcastDto seq) {
+	public BroadcastDto selectone(String broadcast_title) {
 
-		return Broadcastdao.selectone(seq);
+		return Broadcastdao.selectone(broadcast_title);
 	}
 	@Override
 	public int insert(BroadcastDto dto) {

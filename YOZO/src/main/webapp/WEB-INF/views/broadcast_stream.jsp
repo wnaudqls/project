@@ -15,6 +15,7 @@
 
 </head>
 <body>
+<button onclick="cleartime()">초기화</button>
 	<%@include file="form/header.jsp"%>
 	<div id="broadcastlist">
 	</div>
@@ -68,18 +69,29 @@ function broadlist(){
 				 var broadcast_title = list[i].broadcast_title;
 				 var broadcast_maxclient = list[i].broadcast_maxclient;
 				 var broadcast_currentclient = list[i].broadcast_currentclient;
+				 
 				 $("#broadcastlist").append(
-						 '<div class="broadcast_title">'
+						 '<div class="broadlist"' 
+						 + "onclick='location.href="+"\"broadcast/"+broadcast_title+"\"'>"
+						 +'<div class="broadcast_title>'
+						 +'<span class="title">'
 						 +	broadcast_title
-						 +'</div>'
-						 +'<div class="broadcast_title">'
+						 +'</span>'
+						 +'<div class="broadcast_nick">'
+						 +'<span class="mid">'
 						 +	mid
+						 +'</span>'
 						 +'</div>'
-						 +'<div class="broadcast_title">'
+						 +'<div class="broadcast_nick">'
+						 +'<span class="nick">'
 						 +	member_nick
+						 +'</span>'
 						 +'</div>'
-						 +'<div class="broadcast_title">'
+						 +'<div class="broadcast_nick">'
+						 +'<span class="client">'
 						 +	broadcast_currentclient+'/'+broadcast_maxclient
+						 +'</span>'
+						 +'</div>'
 						 +'</div>'
 						);
 			 }
@@ -95,6 +107,10 @@ function broadlist(){
 	loop = setTimeout(function() { 
 		broadlist(); 
 		}, 3000); //3초마다 반복
+}
+function cleartime(){
+	
+	clearTimeout(loop);
 }
 
 

@@ -2,7 +2,38 @@
 margin-top: 33%;
 }
 #broadcastlist{
-	margin-top: 3%;
-	width: 50%;
-
+	width: 90%;
+	margin-left: 10%;
+	margin-top: 3vh;
+	cursor: pointer;
 }
+.broadlist{
+	background-color: #5CD1E5;
+	position: absolute;
+	margin-top: 3%;
+    width: 5%;
+    float: left;
+    color: white;
+}
+
+.title {
+	width: 30%;
+}
+.broadcast_nick{
+	background-color: #B778FF;
+	border-bottom: 1px solid black;
+	border-radius: 0px 0px 4px 4px;
+	padding: 4px;
+	color: black;
+}
+.mid{
+	color: black;
+}
+.nick{
+
+	color: black;
+}
+.client{
+	color: #B2CCFF;
+}
+

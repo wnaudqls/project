@@ -14,11 +14,11 @@ public class BroadcastDaoImpl implements BroadcastDao{
 
 	@Autowired
 	SqlSessionTemplate session;
-	public List<BroadcastDto> selectList(String ymd) {
+	public List<BroadcastDto> selectList() {
 	
 		List<BroadcastDto> list = null;
 		try {
-			list = session.selectList(namespace + "selectlist",ymd);
+			list = session.selectList(namespace + "selectlist");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -27,9 +27,13 @@ public class BroadcastDaoImpl implements BroadcastDao{
 
 	}
 
-	public BroadcastDto selectone(int seq) {
-		BroadcastDto dto = null;
-		dto = session.selectOne(namespace + "selectOne", seq);
+	public BroadcastDto selectone(BroadcastDto dto) {
+		try {
+			dto = session.selectOne(namespace + "selectOne", dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return dto;
 	}
 
@@ -58,11 +62,11 @@ public class BroadcastDaoImpl implements BroadcastDao{
 		return res;
 	}
 
-	public int delete(int seq) {
+	public int delete(BroadcastDto dto) {
 	
 		int res = 0;
 		try {
-			res = session.insert(namespace + "delete", seq);
+			res = session.insert(namespace + "delete", dto);
 			if (res > 0) {
 				session.commit();
 			}

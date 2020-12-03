@@ -27,6 +27,7 @@
 		<mapper resource="/mybatis/recipe-mapper.xml"/>
 		<mapper resource="/mybatis/goods-mapper.xml"/>
 		<mapper resource="/mybatis/mybatis-mapper.xml"/>
+		<mapper resource="/mybatis/broadcast-mapper.xml"/>
 		<!-- <mapper resource="/mybatis/cart-mapper.xml"/> -->
 		
 		

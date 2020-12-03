@@ -1,30 +1,62 @@
 package com.yori.zori.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+/*
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.yori.zori.broadcast.dto.BroadcastDto;
-import com.yori.zori.broadcast.dto.BroadcastDto_Reservation;
+import com.yori.zori.broadcast.dto.BroadcastDto_Reservation;*/
+
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.yori.zori.model.biz.BroadcastBiz;
 import com.yori.zori.model.biz.BroadcastBizImpl;
+import com.yori.zori.model.dto.BroadcastDto;
 
 /**
  * Servlet implementation class CalController
  */
-@WebServlet("/broadcast.do")
-public class BroadcastController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@Controller
+public class BroadcastController {
+	private static Logger logger = LoggerFactory.getLogger(BroadcastController.class);
+	
+	@Autowired
+	BroadcastBiz biz;
 
 	public BroadcastController() {
 
 	}
-
+	
+	
+	@RequestMapping("broadcastlist")
+	@ResponseBody
+	public Map<String, List<BroadcastDto>>broadcast(){
+		Map<String, List<BroadcastDto>> map = new HashMap<String, List<BroadcastDto>>();
+		List<BroadcastDto> list = biz.selectList();
+		if(list != null) {
+			map.put("list", list);
+			logger.info("broadcastlist 담는중");
+		}
+		return map;
+	}
+}
+	
+	
+/*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -105,6 +137,5 @@ public class BroadcastController extends HttpServlet {
 
 			e.printStackTrace();
 		}
-	}
+	}*/
 
-}

@@ -19,28 +19,28 @@ public class BroadcastBizImpl implements BroadcastBiz{
 	
 	@Autowired
 	private BroadcastDao_Reservation dao_Reservation;
-	
-	public List<BroadcastDto> selectList(String ymd) {
-		return Broadcastdao.selectList(ymd);
+	@Override
+	public List<BroadcastDto> selectList() {
+		return Broadcastdao.selectList();
 
 	}
-	
-	public BroadcastDto selectone(int seq) {
+	@Override
+	public BroadcastDto selectone(BroadcastDto seq) {
 
 		return Broadcastdao.selectone(seq);
 	}
-
-	public int insert(BroadcastDto_Reservation dto) {
+	@Override
+	public int insert(BroadcastDto dto) {
 	
-		return dao_Reservation.insert(dto);
+		return Broadcastdao.insert(dto);
 	}
-
+	@Override
 	public int update(BroadcastDto dto) {
 	
 		return Broadcastdao.update(dto);
 	}
-
-	public int delete(int seq) {
+	@Override
+	public int delete(BroadcastDto seq) {
 	
 		return Broadcastdao.delete(seq);
 	}

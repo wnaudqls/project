@@ -19,4 +19,12 @@ public class MainController {
 	public String recipe() {
 		return "recipe_list";
 	}
+	@RequestMapping("stream")
+	public String stream() {
+		return "broadcast_stream";
+	}
+	@RequestMapping("watch")
+	public String watch() {
+		return "broadcast_watch";
+	}
 }

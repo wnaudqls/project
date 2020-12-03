@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "Broadcast">
+	<select id="selectlist" resultType="broadcastdto">
+		SELECT * FROM BROADCAST
+	</select>
+	
+	<select id="search" resultType="broadcastdto">
+		SELECT * FROM BROADCAST
+		WHERE MEMBER_ID LIKE '%'||#{search}||'%'
+		OR BROADCAST_TITLE LIKE '%'||#{search}||'%'
+	</select>
+	<insert id="insert">
+		INSERT INTO BROADCAST VALUES(BROAD_SEQ.NEXTVAL, #{member_id},
+		#{broadcast_title},#{broadcast_maxclient},
+		0,SYSDATE)
+	</insert>
+	<delete id="delete">
+		DELETE FROM BROADCAST
+		WHERE BROADCAST_CURRENTCLIENT = 0 
+		AND 
+		BROADCAST_NO = #{broadcast_no}
+	</delete>
+</mapper>

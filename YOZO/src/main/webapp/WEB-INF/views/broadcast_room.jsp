@@ -6,13 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>${dto.broadcast_title }</title>
-</head>
 <script type="text/javascript">
 window.onunload = function(event) {
 
 	disconnect();
 };
+
 </script>
+
+
+</head>
 <body>
 	<jsp:include page="/WEB-INF/views/form/header.jsp"></jsp:include>
 
@@ -47,9 +50,17 @@ window.onunload = function(event) {
 			</c:if>
 	</c:otherwise>
 </c:choose>
+
+
+
+
+<div id="chatarea">
+<input type="text" id="message" placeholder="채팅을 입력하세요." onkeyup="enterkey();"> <button id="sendBtn">전송</button>
 <div id="messageArea">
 
 </div>
+</div>
+
 
 
 <input type="hidden" id="nickname" value="${login.member_nick }">
@@ -84,59 +95,28 @@ function connect(){
 	        $("#messageArea").prepend(content.chat_content+ "<br>");
 			
 	    });
+		 client.subscribe("/getmsg/chat/leave/"+rid, function (chat) {
+		        var val = JSON.parse(chat.body);
+		        console.log(val.chat_content);
+		        $("#messageArea").prepend(val.chat_content+ "<br>");
+		    });
 }
 function onError(){
 	
 }
 
-
-function disconnect(){
-	client.send("/sendmsg/chat/disconnect", {}, JSON.stringify({chat_title: rid, type:'LEAVE', user_id: nickname}));
-	client.subscribe("/getmsg/chat/room/"+rid, function (chat) {
-	        var val = JSON.parse(chat.body);
-	        $("#messageArea").prepend(val.user_id+": "+ val.chat_content+ "<br>");
-	    });
-	//document.getElementById("disconnect").style.display="none";
-	client.disconnect();
-	location.href="/YORIZORI/stream"
-}
-
-	//handler에서 정해준 서버 겅로로 설정
-
-	// SockJS로 연결한 웹소켓 주소에 Stomp을 씌움
-
-	// sock의 이벤트
-
-	
-/*
-$("#sendBtn").click(function() {
-	sendMessage();
-	$('#message').val('')
-});*/
-
-
-/*
-// 메시지 전송
-function sendMessage() {
-	msg = document.getElementById("message");
-    client.send('/sendmsg/chat/message', {}, JSON.stringify({broadcast_no: broadcast_no , chat_title: rid, type:'CHAT', user_id: nickname , chat_content: msg.value}));
-	msg.value = '';
-}*/
-/*
 function enterkey() {
 	//keyCode: 입력한 코드(13번 == enter)
 	if (window.event.keyCode == 13) {
 		sendMessage();
 	}
-}*/
+}
 
- //document.getElementById("disconnect").style.display="inline";
 
 function textclear(){
 	$("#messageArea").empty();
 	
 }
-
 
 window.onpageshow = function (event)
 {
@@ -146,5 +126,44 @@ window.onpageshow = function (event)
 	}
 
 }
+
+function disconnect(){
+	client.send("/sendmsg/chat/disconnect", {}, JSON.stringify({chat_title: rid, type:'LEAVE', user_id: nickname}));
+	//document.getElementById("disconnect").style.display="none";
+	client.disconnect();
+	location.href="/YORIZORI/stream"
+}
+
+//메시지 전송
+function sendMessage() {
+	msg = document.getElementById("message");
+    client.send('/sendmsg/chat/message', {}, JSON.stringify({broadcast_no: broadcast_no , chat_title: rid, type:'CHAT', user_id: nickname , chat_content: msg.value}));
+	msg.value = '';
+}
+
+
+
+	//handler에서 정해준 서버 겅로로 설정
+
+	// SockJS로 연결한 웹소켓 주소에 Stomp을 씌움
+
+	// sock의 이벤트
+
+	
+
+$("#sendBtn").click(function() {
+	sendMessage();
+	$('#message').val('')
+});
+
+
+	
+
+
+ //document.getElementById("disconnect").style.display="inline";
+
+
+
+
 </script>
 </html>

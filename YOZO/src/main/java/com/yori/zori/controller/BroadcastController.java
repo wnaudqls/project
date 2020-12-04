@@ -78,6 +78,22 @@ public class BroadcastController {
         template.convertAndSend("/getmsg/chat/join/"+dto.getChat_title(), dto);
        
     }
+	@MessageMapping("/chat/disconnect")
+    public void disconnect(ChatDto dto) {
+		 //접속했을때 실행
+		logger.info(dto.getUser_id()+"님 퇴장");
+		dto.setChat_content(dto.getUser_id() + "님이 퇴장하셨습니다.");
+        template.convertAndSend("/getmsg/chat/leave/"+dto.getChat_title(), dto);
+       
+    }
+	@MessageMapping("/chat/message")
+    public void message(ChatDto dto) {
+		 //접속했을때 실행
+		logger.info(dto.getChat_title()+"방\n{}: {}",dto.getUser_id(),dto.getChat_content());
+        template.convertAndSend("/getmsg/chat/room/"+dto.getChat_title(), dto);
+       
+    }
+	
 }
 	
 	

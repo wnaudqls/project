@@ -16,6 +16,7 @@ window.onunload = function(event) {
 
 
 </head>
+<link href="/YORIZORI/resources/css/chatroom.css" rel="stylesheet">
 <body>
 	<jsp:include page="/WEB-INF/views/form/header.jsp"></jsp:include>
 
@@ -52,10 +53,17 @@ window.onunload = function(event) {
 </c:choose>
 
 
+<div id="localvideo">
+
+</div>
+<div id="remotevideo">
+
+</div>
 
 
 <div id="chatarea">
-<input type="text" id="message" placeholder="채팅을 입력하세요." onkeyup="enterkey();"> <button id="sendBtn">전송</button>
+<input type="text" id="message" placeholder="채팅을 입력하세요." onkeyup="enterkey();"> 
+<button id="sendBtn">전송</button>
 <div id="messageArea">
 
 </div>
@@ -108,7 +116,13 @@ function onError(){
 function enterkey() {
 	//keyCode: 입력한 코드(13번 == enter)
 	if (window.event.keyCode == 13) {
+		var msg = document.getElementById("message");
+		var aadd = msg.value;
+		if(aadd.trim() == null || aadd.trim() == ''){
+			alert("하나라도 입력하세요.");
+		}else{
 		sendMessage();
+		}
 	}
 }
 
@@ -152,8 +166,15 @@ function sendMessage() {
 	
 
 $("#sendBtn").click(function() {
-	sendMessage();
-	$('#message').val('')
+	var msg = document.getElementById("message");
+	var aadd = msg.value;
+	if(aadd.trim() == null || aadd.trim() == ''){
+		alert("하나라도 입력하세요.");
+	}else{
+		sendMessage();
+		$('#message').val('')
+	}
+
 });
 
 

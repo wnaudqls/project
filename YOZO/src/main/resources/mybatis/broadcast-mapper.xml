@@ -3,6 +3,7 @@
 <mapper namespace = "Broadcast">
 	<select id="selectlist" resultType="broadcastdto">
 		SELECT * FROM BROADCAST
+		WHERE BROADCAST_PUBLIC = 'Y'
 	</select>
 	
 	<select id="search" resultType="broadcastdto">
@@ -17,12 +18,25 @@
 	<insert id="insert">
 		INSERT INTO BROADCAST VALUES(BROAD_SEQ.NEXTVAL, #{member_id},
 		#{broadcast_title},#{broadcast_maxclient},
-		0,SYSDATE)
+		0,SYSDATE, 'Y', 'N')
 	</insert>
 	<delete id="delete">
 		DELETE FROM BROADCAST
+		WHER
+		BROADCAST_NO = #{broadcast_no}
+	</delete>
+	<update id="update">
+		UPDATE BROADCAST SET BROADCAST_CURRENTCLIENT = BROADCAST_CURRENTCLIENT+1
 		WHERE BROADCAST_CURRENTCLIENT = 0 
 		AND 
 		BROADCAST_NO = #{broadcast_no}
-	</delete>
+	</update>
+	<update id="updateclient">
+		UPDATE BROADCAST SET BROADCAST_CURRENTCLIENT = BROADCAST_CURRENTCLIENT-1
+		WHERE 
+		BROADCAST_CURRENTCLIENT > -1
+		AND 
+		BROADCAST_NO = #{broadcast_no}
+	</update>
+	
 </mapper>

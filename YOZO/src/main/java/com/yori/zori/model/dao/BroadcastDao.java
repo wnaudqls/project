@@ -16,6 +16,7 @@ public interface BroadcastDao{
 	public int update(BroadcastDto dto);
 
 	public int delete(BroadcastDto dto);
+	public int updateCurrentClient(BroadcastDto dto);
 	
 	/*
 	public int multidelete(String[] seq) {

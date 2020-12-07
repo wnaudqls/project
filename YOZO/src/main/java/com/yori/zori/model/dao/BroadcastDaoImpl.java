@@ -44,8 +44,6 @@ public class BroadcastDaoImpl implements BroadcastDao{
 			res = session.insert(namespace + "insert", dto);
 		} catch (Exception e) {
 			// TODO: handle exception
-		} finally {
-			
 		}
 		return res;
 	}
@@ -53,13 +51,11 @@ public class BroadcastDaoImpl implements BroadcastDao{
 	public int update(BroadcastDto dto) {
 		int res = 0;
 		try {
-			res = session.insert(namespace + "update", dto);
+			res = session.update(namespace + "update", dto);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-		} finally {
-			session.close();
-		}
+		} 
 		return res;
 	}
 
@@ -67,13 +63,23 @@ public class BroadcastDaoImpl implements BroadcastDao{
 	
 		int res = 0;
 		try {
-			res = session.insert(namespace + "delete", dto);
-			if (res > 0) {
-				session.commit();
-			}
+			res = session.delete(namespace + "delete", dto);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		return res;
+	}
+
+	@Override
+	public int updateCurrentClient(BroadcastDto dto) {
+		// TODO Auto-generated method stub
+		int res = 0;
+		try {
+			res = session.update(namespace + "updateclient", dto);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		} 
 		return res;
 	}
 	

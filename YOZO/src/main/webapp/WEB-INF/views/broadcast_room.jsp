@@ -92,7 +92,7 @@ sock = new SockJS("/YORIZORI/chatserver");
 client = Stomp.over(sock);
 client.connect({}, connect, onError);
 function connect(){
-	   client.send("/sendmsg/chat/join", {}, JSON.stringify({chat_title: rid, type:'ENTER', user_id: nickname})); 
+	   client.send("/sendmsg/chat/join", {}, JSON.stringify({broadcast_no: broadcast_no, chat_title: rid, type:'ENTER', user_id: nickname})); 
 	    // 4. subscribe(path, callback)로 메시지를 받을 수 있다. callback 첫번째 파라미터의 body로 메시지의 내용이 들어온다.
 	     client.subscribe("/getmsg/chat/room/"+rid, function (chat) {
 	        var content = JSON.parse(chat.body);
@@ -142,7 +142,7 @@ window.onpageshow = function (event)
 }
 
 function disconnect(){
-	client.send("/sendmsg/chat/disconnect", {}, JSON.stringify({chat_title: rid, type:'LEAVE', user_id: nickname}));
+	client.send("/sendmsg/chat/disconnect", {}, JSON.stringify({broadcast_no: broadcast_no, chat_title: rid, type:'LEAVE', user_id: nickname}));
 	//document.getElementById("disconnect").style.display="none";
 	client.disconnect();
 	location.href="/YORIZORI/stream"

@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yori.zori.model.biz.BroadcastBiz;
 import com.yori.zori.model.biz.BroadcastBizImpl;
+import com.yori.zori.model.biz.ChatBiz;
 import com.yori.zori.model.dto.BroadcastDto;
 import com.yori.zori.model.dto.ChatDto;
 
@@ -43,6 +44,9 @@ public class BroadcastController {
 	
 	@Autowired
 	BroadcastBiz biz;
+	
+	@Autowired
+	ChatBiz cbiz;
 
 	@Autowired
 	private SimpMessagingTemplate template;
@@ -75,7 +79,11 @@ public class BroadcastController {
 		 //접속했을때 실행
 		logger.info(dto.getUser_id()+"님 등장");
 		dto.setChat_content(dto.getUser_id() + "님이 입장하셨습니다.");
+		BroadcastDto bdto = new BroadcastDto();
+		bdto.setBroadcast_no(dto.getBroadcast_no());
         template.convertAndSend("/getmsg/chat/join/"+dto.getChat_title(), dto);
+        biz.update(bdto);
+        cbiz.insert(dto);
        
     }
 	@MessageMapping("/chat/disconnect")
@@ -83,12 +91,28 @@ public class BroadcastController {
 		 //접속했을때 실행
 		logger.info(dto.getUser_id()+"님 퇴장");
 		dto.setChat_content(dto.getUser_id() + "님이 퇴장하셨습니다.");
+		BroadcastDto bdto = new BroadcastDto();
+		bdto.setBroadcast_no(dto.getBroadcast_no());
         template.convertAndSend("/getmsg/chat/leave/"+dto.getChat_title(), dto);
-       
+        biz.updateCurrentClient(bdto);
+        cbiz.insert(dto);
+        BroadcastDto checkdto = biz.selectone(dto.getChat_title());
+        if(checkdto.getBroadcast_anyone().equals("N")) {
+        	if(checkdto.getBroadcast_currentclient() <= 0) {
+        		int res = biz.delete(checkdto);
+        		if(res > 0) {
+        			logger.info("{}방 삭제 성공",checkdto.getBroadcast_title());
+        		}else {
+        			logger.info("{}방 삭제실패",checkdto.getBroadcast_title());
+        		}
+        	}
+        }
+        
     }
 	@MessageMapping("/chat/message")
     public void message(ChatDto dto) {
 		 //접속했을때 실행
+		cbiz.insert(dto);
 		logger.info(dto.getChat_title()+"방\n{}: {}",dto.getUser_id(),dto.getChat_content());
         template.convertAndSend("/getmsg/chat/room/"+dto.getChat_title(), dto);
        

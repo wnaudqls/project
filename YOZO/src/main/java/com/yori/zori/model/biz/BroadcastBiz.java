@@ -12,7 +12,7 @@ public interface BroadcastBiz {
 	public int insert(BroadcastDto dto);
 
 	public int update(BroadcastDto dto);
-
+	public int updateCurrentClient(BroadcastDto dto);
 	public int delete(BroadcastDto dto);
 
 }

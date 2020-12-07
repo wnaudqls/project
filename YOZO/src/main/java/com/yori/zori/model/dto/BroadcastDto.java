@@ -13,8 +13,8 @@ public class BroadcastDto {
 	private String broadcast_password;
 	private String search;
 	private Date broadcast_date;
-	
-	
+	private String broadcast_public;
+	private String broadcast_anyone;
 	 
 
 	
@@ -23,7 +23,8 @@ public class BroadcastDto {
 		
 	}
 	public BroadcastDto(int broadcast_no, String member_id, String broadcast_title, String broadcast_password,
-			int broadcast_maxclient, int broadcast_currentclient, Date broadcast_date, String search, String member_nick) {
+			int broadcast_maxclient, int broadcast_currentclient, Date broadcast_date, String search, String broadcast_anyone,
+			String member_nick, String broadcast_public) {
 		
 		this.member_nick = member_nick;
 		this.broadcast_no = broadcast_no;
@@ -34,6 +35,21 @@ public class BroadcastDto {
 		this.broadcast_currentclient = broadcast_currentclient;
 		this.broadcast_date = broadcast_date;
 		this.search = search;
+		this.broadcast_public = broadcast_public;
+		this.broadcast_anyone = broadcast_anyone;
+	}
+	
+	public String getBroadcast_anyone() {
+		return broadcast_anyone;
+	}
+	public void setBroadcast_anyone(String broadcast_anyone) {
+		this.broadcast_anyone = broadcast_anyone;
+	}
+	public String getBroadcast_public() {
+		return broadcast_public;
+	}
+	public void setBroadcast_public(String broadcast_public) {
+		this.broadcast_public = broadcast_public;
 	}
 	public String getMember_nick() {
 		return member_nick;

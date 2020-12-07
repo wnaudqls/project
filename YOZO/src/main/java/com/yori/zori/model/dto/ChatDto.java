@@ -1,5 +1,7 @@
 package com.yori.zori.model.dto;
 
+import java.sql.Date;
+
 public class ChatDto {
 	public enum MessageType{
 		ENTER,LEAVE,CHAT
@@ -10,15 +12,24 @@ public class ChatDto {
 	String user_id;
 	String chat_content;
 	MessageType type;
+	Date regdate;
 	public ChatDto() {
 
 	}
-	public ChatDto(int broadcast_no, String chat_title, String user_id, String chat_content, MessageType type) {
+	public ChatDto(int broadcast_no, String chat_title, String user_id, String chat_content, MessageType type, Date regdate) {
 		this.broadcast_no = broadcast_no;
 		this.chat_title = chat_title;
 		this.user_id = user_id;
 		this.chat_content = chat_content;
 		this.type = type;
+		this.regdate = regdate;
+	}
+	
+	public Date getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
 	public int getBroadcast_no() {
 		return broadcast_no;

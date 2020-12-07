@@ -47,4 +47,9 @@ public class BroadcastBizImpl implements BroadcastBiz{
 	public List<BroadcastDto_Reservation> checklist(String id){
 		return dao_Reservation.checklist(id);
 	}
+	@Override
+	public int updateCurrentClient(BroadcastDto dto) {
+		// TODO Auto-generated method stub
+		return Broadcastdao.updateCurrentClient(dto);
+	}
 }

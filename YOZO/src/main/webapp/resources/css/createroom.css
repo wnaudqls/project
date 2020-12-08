@@ -1,0 +1,49 @@
+body{
+	background-color: skyblue;
+	margin: 0;
+}
+form{
+	width: 40%;
+	height: 70vh;
+	background-color: white;
+	border-radius: 10px;
+	margin-left: 30%;
+	margin-top: 10vh;
+}
+.blocks{
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+	font-size: 20pt;
+}
+.title{
+	width: 20.8rem;
+}
+.password{
+	width: 15.8rem;
+}
+.maxclients{
+	width: 21rem;
+}
+.public{
+	width: 28rem;
+}
+#title{
+	padding-top: 10%;
+}
+#select{
+	color: pink;
+	font-size: 10pt;
+}
+.inputs{
+	float: right;
+	height: 17px;
+}
+.inputclient{
+	float: right;
+	height: 17px;
+	width: 167px;
+}
+#buttons{
+text-align: center;
+}

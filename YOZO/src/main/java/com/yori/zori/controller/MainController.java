@@ -23,8 +23,8 @@ public class MainController {
 	public String stream() {
 		return "broadcast_stream";
 	}
-	@RequestMapping("watch")
+	@RequestMapping("createroom")
 	public String watch() {
-		return "broadcast_watch";
+		return "broadcast_newroom";
 	}
 }

@@ -1,6 +1,7 @@
 package com.yori.zori.controller;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,12 +26,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yori.zori.model.biz.BroadcastBiz;
-import com.yori.zori.model.biz.BroadcastBizImpl;
 import com.yori.zori.model.biz.ChatBiz;
 import com.yori.zori.model.dto.BroadcastDto;
 import com.yori.zori.model.dto.ChatDto;
@@ -55,7 +55,19 @@ public class BroadcastController {
 
 	}
 	
-	
+	@RequestMapping("/roomres")
+	public String createroom(BroadcastDto dto ) throws UnsupportedEncodingException {
+		
+		int res = biz.insert(dto);
+		String title = dto.getBroadcast_title();
+		String encoded = URLEncoder.encode(title,"UTF-8");
+		
+		if(res > 0) {
+			return "redirect:/broadcast/"+encoded;
+		}else {
+			return "";
+		}
+	}
 	@RequestMapping("/broadcastlist")
 	@ResponseBody
 	public Map<String, List<BroadcastDto>>broadcast(){

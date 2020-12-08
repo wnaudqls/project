@@ -125,8 +125,8 @@
       <h1>로그인</h1>
          <input type="hidden" name="command"  value="login"> 
          <input type="text" id="id" name="id"  placeholder="아이디를 입력하세요"> <br> 
-         <input type="password" id="pw" name="pw"  placeholder="비밀번호를 입력하세요"> <br><br>
-            <input type="button" class="userBtn" value="로그인">
+         <input type="password" id="pw" name="pw"  placeholder="비밀번호를 입력하세요" onkeyup="keyupLogin()"> <br><br>
+            <input type="button" class="userBtn" value="로그인" onclick="normalLogin();">
          <br>
          <br> 아직 회원이 아니신가요? <br> 
          <input type="button" onclick="location.href='signup'" class="userBtn" value="회원가입 하기" >
@@ -152,7 +152,14 @@
 
    var userBtn = document.getElementsByClassName("userBtn")[0];
 	
-	userBtn.onclick = function(){
+   	function keyupLogin(){
+   		if(window.event.keyCode == 13){
+   			normalLogin();
+   		}
+   		
+   	}
+   
+	 function normalLogin(){
 		var id = document.getElementById("id").value;
 		var pw = document.getElementById("pw").value;
 		
@@ -161,6 +168,12 @@
 	    };
 		console.log(id);
 		console.log(pw);
+		if(id.trim() == null || id.trim() == ""){
+			alert("아이디를 입력해주세요.");
+		}else if (pw.trim() == null || pw.trim() == ""){
+			alert("비밀번호를 입력해주세요.");
+		}else{
+		
 		$.ajax({
 	        url: "/YORIZORI/loginres",
 	        dataType: 'json',
@@ -179,9 +192,10 @@
 	        error : function(userRes){
 	       
 	          		alert("오류발생");
-	            }
-	        });
-	};
+	            	}
+	       		});
+			};
+		}
 	
 
 

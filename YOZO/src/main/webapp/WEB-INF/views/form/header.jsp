@@ -260,8 +260,8 @@
 				src="/YORIZORI/resources/img/broadcast_icon.png">
 			<div id="dropstream_content" class="dropstream_content">
 
-				<a href="/YORIZORI/stream" class="useId">방송하기</a>
-				<a href="/YORIZORI/watch">시청하기</a> <a
+				<a href="/YORIZORI/stream" class="useId">방송목록</a>
+				<a href="/YORIZORI/createroom">방만들기</a> <a
 					href="/YORIZORI/book" class="useId">예약하기</a>
 			</div>
 		</div>

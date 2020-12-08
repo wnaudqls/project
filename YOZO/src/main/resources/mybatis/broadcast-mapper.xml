@@ -16,9 +16,10 @@
 		WHERE BROADCAST_TITLE LIKE #{broadcast_title}
 	</select>
 	<insert id="insert">
-		INSERT INTO BROADCAST VALUES(BROAD_SEQ.NEXTVAL, #{member_id},
-		#{broadcast_title},#{broadcast_maxclient},
-		0,SYSDATE, 'Y', 'N')
+		INSERT INTO BROADCAST VALUES(
+		BROAD_SEQ.NEXTVAL, #{member_id},#{member_nick},
+		#{broadcast_title},#{broadcast_password},#{broadcast_maxclient},
+		0,SYSDATE, #{broadcast_public}, 'N')
 	</insert>
 	<delete id="delete">
 		DELETE FROM BROADCAST

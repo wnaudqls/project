@@ -24,6 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			request.getRequestURI().contains("/YORIZORI/success") ||
 			request.getRequestURI().contains("/YORIZORI/recipelist")||
 			request.getRequestURI().contains("/YORIZORI/resources")||
+			request.getRequestURI().contains("/YORIZORI/broadcastselectlist")||
 			request.getRequestURI().contains("/YORIZORI/broadcastlist")
 			||(request.getSession().getAttribute("login")!=null)) 
 		
@@ -33,7 +34,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 		
 		//session에 값이 없으면,
 		if(request.getSession().getAttribute("login")==null) {
-			PrintWriter out;
 			response.sendRedirect("/YORIZORI/login");
 			return false;
 		}

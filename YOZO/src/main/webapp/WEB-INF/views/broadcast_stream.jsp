@@ -15,8 +15,10 @@
 
 </head>
 <body>
-<button onclick="cleartime()">초기화</button>
 	<%@include file="form/header.jsp"%>
+	<input id="search" placeholder="방 이름을 입력해 주세요.">
+	<button onclick="search()">검색</button>
+	<button onclick="resetbroad()">초기화</button>
 	<div id="broadcastlist">
 	</div>
 	<div id="footer">
@@ -35,25 +37,17 @@
 	@import url("resources/css/broadcastlist.css");
 
 </style>
-<!-- <script src="resources/js/RTCMultiConnection.min.js">
-	//RTCMultiConnection api 불러옴
-</script>
-<script src="resources/js/socket.io.js">
-</script> 
-<script type="text/javascript" src="resources/js/broadcast.js">
-	</script>
 
--->
 
 <script type="text/javascript">
 
 var loop;
+var reset;
 window.onload = function(){
 	broadlist();
 }
 
 function broadlist(){
-	
 	$.ajax({
 		type: "post",
 		url: "/YORIZORI/broadcastlist",
@@ -72,7 +66,7 @@ function broadlist(){
 				 
 				 $("#broadcastlist").append(
 						 '<div class="broadlist"' 
-						 + "onclick='location.href="+"\"broadcast/"+broadcast_title+"\"'>"
+						 + 'onclick="location.href='+'\'broadcast/'+broadcast_title+'\'">'
 						 +'<div class="broadcast_title>'
 						 +'<span class="title">'
 						 +	broadcast_title
@@ -96,7 +90,7 @@ function broadlist(){
 						);
 			 }
 			
-			
+		 
 			
 			 
 		 },error: function(error){
@@ -108,9 +102,79 @@ function broadlist(){
 		broadlist(); 
 		}, 3000); //3초마다 반복
 }
-function cleartime(){
+function search(){
+	var search = document.getElementById("search").value;
+	if(search.trim() == '' || search.trim() == null){
+		alert("방 이름을 입력해 주세요.");
+	}else{
+		
+		reset = true;
+		clearTimeout(loop);
+		var searchval = {
+				"search": search
+		}
+		$.ajax({
+			 type: "post",
+			 url: "/YORIZORI/broadcastselectlist",
+			 dataType: "json",
+			 data: JSON.stringify(searchval),
+			 contentType: "application/json",
+			 success: function(data){
+				 $("#broadcastlist").empty();
+				 var list = data.list;
+				 for(i in list){
+					 var member_id = list[i].member_id;
+					 var mid = member_id.substring(0,4);
+					 var member_nick = list[i].member_nick.substring(0,4);
+					 var broadcast_title = list[i].broadcast_title;
+					 var broadcast_maxclient = list[i].broadcast_maxclient;
+					 var broadcast_currentclient = list[i].broadcast_currentclient;
+					 
+					 $("#broadcastlist").append(
+							 '<div class="broadlist"' 
+							 + 'onclick="location.href='+'\'broadcast/'+broadcast_title+'\'">'
+							 +'<div class="broadcast_title>'
+							 +'<span class="title">'
+							 +	broadcast_title
+							 +'</span>'
+							 +'<div class="broadcast_nick">'
+							 +'<span class="mid">'
+							 +	mid
+							 +'</span>'
+							 +'</div>'
+							 +'<div class="broadcast_nick">'
+							 +'<span class="nick">'
+							 +	member_nick
+							 +'</span>'
+							 +'</div>'
+							 +'<div class="broadcast_nick">'
+							 +'<span class="client">'
+							 +	broadcast_currentclient+'/'+broadcast_maxclient
+							 +'</span>'
+							 +'</div>'
+							 +'</div>'
+							);
+				 }
+				
+				
+				
+				 
+				 },error: function(error){
+				 
+				 }
+			})
+	}
+
+}
+function resetbroad(){
+	var search = document.getElementById("search");
 	
-	clearTimeout(loop);
+	if(reset == true){
+		reset = false;
+		search.value = "";
+		console.log(search.value);
+		broadlist();
+	}
 }
 
 

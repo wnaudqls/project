@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yori.zori.model.biz.BroadcastBiz;
@@ -68,6 +69,7 @@ public class BroadcastController {
 			return "";
 		}
 	}
+	
 	@RequestMapping("/broadcastlist")
 	@ResponseBody
 	public Map<String, List<BroadcastDto>>broadcast(){
@@ -79,6 +81,20 @@ public class BroadcastController {
 		}
 		return map;
 	}
+	
+	@RequestMapping("/broadcastselectlist")
+	@ResponseBody
+	public Map<String, List<BroadcastDto>>broadselectlist(@RequestBody BroadcastDto dto){
+		Map<String, List<BroadcastDto>> map = new HashMap<String, List<BroadcastDto>>();
+		List<BroadcastDto> list = biz.search(dto);
+		logger.info("broadcastselectlist 담는중");
+		logger.info("검색한 값: {}",biz.search(dto));
+		if(list != null) {
+			map.put("list", list);
+		}
+		return map;
+	}
+	
 	@GetMapping("/broadcast/{broadcast_title}")
 	public String room(@PathVariable("broadcast_title")String broadcast_title, Model model){
 		BroadcastDto dto = biz.selectone(broadcast_title);

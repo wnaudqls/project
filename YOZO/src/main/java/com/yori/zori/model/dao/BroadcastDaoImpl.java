@@ -1,5 +1,6 @@
 package com.yori.zori.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -81,6 +82,20 @@ public class BroadcastDaoImpl implements BroadcastDao{
 			// TODO: handle exception
 		} 
 		return res;
+	}
+
+	@Override
+	public List<BroadcastDto> search(BroadcastDto dto) {
+		// TODO Auto-generated method stub
+		List<BroadcastDto> list = new ArrayList<BroadcastDto>();
+		try {
+			list = session.selectList(namespace+"search",dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	/*

@@ -52,4 +52,9 @@ public class BroadcastBizImpl implements BroadcastBiz{
 		// TODO Auto-generated method stub
 		return Broadcastdao.updateCurrentClient(dto);
 	}
+	@Override
+	public List<BroadcastDto> search(BroadcastDto dto) {
+		// TODO Auto-generated method stub
+		return Broadcastdao.search(dto);
+	}
 }

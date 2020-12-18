@@ -6,7 +6,7 @@ import com.yori.zori.model.dto.BroadcastDto;
 
 public interface BroadcastBiz {
 	public List<BroadcastDto> selectList();
-
+	public List<BroadcastDto> search(BroadcastDto dto);
 
 	public BroadcastDto selectone(String broadcast_title);
 	public int insert(BroadcastDto dto);

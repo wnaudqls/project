@@ -10,6 +10,7 @@
 		SELECT * FROM BROADCAST
 		WHERE MEMBER_ID LIKE '%'||#{search}||'%'
 		OR BROADCAST_TITLE LIKE '%'||#{search}||'%'
+		AND BROADCAST_PUBLIC = 'Y'
 	</select>
 	<select id="selectone" resultType="BroadcastDto">
 		SELECT * FROM BROADCAST

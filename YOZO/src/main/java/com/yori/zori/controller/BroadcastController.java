@@ -66,7 +66,7 @@ public class BroadcastController {
 		if(res > 0) {
 			return "redirect:/broadcast/"+encoded;
 		}else {
-			return "";
+			return "redirect:/YORIZORI/createroom";
 		}
 	}
 	
@@ -127,7 +127,7 @@ public class BroadcastController {
         BroadcastDto checkdto = biz.selectone(dto.getChat_title());
         if(checkdto.getBroadcast_anyone().equals("N")) {
         	if(checkdto.getBroadcast_currentclient() <= 0) {
-        		int res = biz.delete(checkdto);
+        		int res = biz.delete(bdto);
         		if(res > 0) {
         			logger.info("{}방 삭제 성공",checkdto.getBroadcast_title());
         		}else {

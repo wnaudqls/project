@@ -38,7 +38,7 @@
 	</div>
 	<div class="blocks">
 	<div class="public">공개여부</div>
-	<select name="group_public" class="inputs" required="required">
+	<select name="broadcast_public" class="inputs" required="required">
 	       			<option value="Y">공개</option>
 	       			<option value="N">비공개</option>
 	 </select>

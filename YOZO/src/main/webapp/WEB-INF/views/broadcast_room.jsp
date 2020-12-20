@@ -80,6 +80,8 @@ window.onunload = function(event) {
 <script type="text/javascript" src="https://cdn.jsdelivr.net/sockjs/latest/sockjs.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
 <script type="text/javascript">
+
+
 var sock;
 var nickname = document.getElementById("nickname").value;
 var client;  
@@ -90,7 +92,12 @@ var broadcast_no = document.getElementById("broadcast_no").value;
 
 sock = new SockJS("/YORIZORI/chatserver");
 client = Stomp.over(sock);
-client.connect({}, connect, onError);
+
+
+window.onload = function(event) {
+	client.connect({}, connect, onError);
+};
+
 function connect(){
 	   client.send("/sendmsg/chat/join", {}, JSON.stringify({broadcast_no: broadcast_no, chat_title: rid, type:'ENTER', user_id: nickname})); 
 	    // 4. subscribe(path, callback)로 메시지를 받을 수 있다. callback 첫번째 파라미터의 body로 메시지의 내용이 들어온다.

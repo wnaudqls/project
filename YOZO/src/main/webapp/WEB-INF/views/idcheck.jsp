@@ -3,12 +3,13 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디 중복확인</title>
 <script type="text/javascript">
 
 	onload = function(){
@@ -36,9 +37,6 @@
 </style>
 </head>
 <body>
-<%
-	String idnotused = request.getParameter("idnotused");
-%>
 
 <div id="idform">
 	<table>
@@ -48,11 +46,18 @@
 			</td>
 		</tr>
 		<tr>
-			<td><%=idnotused.equals("true")?"아이디 생성 가능" : "중복된 아이디 존재" %></td>
+			<td>
+			<c:if test="${check eq 'true' }">
+				아이디 사용이 가능합니다.
+			</c:if>
+			<c:if test="${check eq 'false' }">
+				아이디가 존재합니다.
+			</c:if>
+			</td>
 		</tr>
 		<tr>
 			<td>
-				<input type="button" value="확인" onclick="confirmId('<%=idnotused %>')" />
+				<input type="button" value="확인" onclick="confirmId('${check}')" />
 			</td>
 		</tr>		
 	</table>

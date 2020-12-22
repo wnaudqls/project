@@ -3,7 +3,7 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,9 +38,6 @@
 
 </head>
 <body>
-<%
-	String nicknotused = request.getParameter("nicknotused");
-%>
 <div id="nickform">
 	<table>
 		<tr>
@@ -49,11 +46,20 @@
 			</td>
 		</tr>
 		<tr>
-			<td><%=nicknotused.equals("true")?"닉네임 생성 가능" : "중복된 닉네임 존재" %></td>
+			<td>
+			<c:choose>
+				<c:when test="${check eq 'true' }">
+					닉네임 사용이 가능합니다.
+				</c:when>
+				<c:otherwise>
+					닉네임이 존재합니다.
+				</c:otherwise>
+			</c:choose>
+			</td>
 		</tr>
 		<tr>
 			<td>
-				<input type="button" value="확인" onclick="confirmnick('<%=nicknotused %>')" />
+				<input type="button" value="확인" onclick="confirmnick('${check}')" />
 			</td>
 		</tr>		
 	</table>

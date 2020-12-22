@@ -27,4 +27,8 @@ public class MainController {
 	public String watch() {
 		return "broadcast_newroom";
 	}
+	@RequestMapping("signup")
+	public String signup() {
+		return "join";
+	}
 }

@@ -39,9 +39,9 @@ public class LogFilter implements Filter {
 		sb.append("\n\t* remoteAddr : " + remoteAddr + "\n")
 		.append("\t* URI : " + uri + "\n")
 		.append("\t* URL : " + url + "\n")
-		.append("\t* queryString : " + queryString + "\n")
-		.append("\t* referer : " + referer + "\n")
-		.append("\t* userAgent : " + userAgent);
+		.append("\t* 쿼리스트링(파라미터 ): " + queryString + "\n")
+		.append("\t* 리퍼러(referer) : " + referer + "\n")
+		.append("\t* 사용자 에이전트(userAgent) : " + userAgent);
 		
 		logger.info("[LOG Filter]"+sb);
 		

@@ -20,7 +20,7 @@
       if (doc.value.trim() == "" || doc.value == null) {
          alert("아이디를 입력해 주세요!");
       } else {
-         open("/YORIZORI/user.do?command=idcheck&id="+doc.value,
+         open("/YORIZORI/check/idcheck?id="+doc.value,
                "",
                "width=200, height=200");
       }
@@ -32,7 +32,7 @@
       if (doc.value.trim() == "" || doc.value == null) {
          alert("닉네임를 입력해 주세요!");
       } else {
-         open("/YORIZORI/user.do?command=nickcheck&nick="+doc.value,
+         open("/YORIZORI/check/nickcheck?nick="+doc.value,
                "",
                "width=200, height=200");
       }
@@ -105,10 +105,10 @@
             type:"post",         // post방식
             datatype:"json",      //datatype
             data:{"command":"sendEmail","email":email, "random":checkNum},   //ajax 에서 컨트롤러=샌드이메일 로 이동 (리시버=이베일 & 랜덤=체크넘 가지고)
-            success(data) {
+            success: function (data) {
                alert("전송성공! \n인증번호를 확인해주세요. ");
             },
-            error(err) {
+            error: function(err) {
                alert("해당 이메일 전송 실패");
             }
              

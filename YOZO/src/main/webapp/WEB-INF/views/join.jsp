@@ -13,7 +13,7 @@
    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
    
    <script type="text/javascript">
-   var rnum=0;
+   var rnum;
    function idCheck(){
       
       var doc = document.getElementsByName("id")[0];
@@ -92,24 +92,31 @@
    });
 
 
-   function emailCheck(checkNum) {   //메일 보내기 기능 버튼! (랜덤 정수 반환받는 파라미터)
+   function emailCheck() {   //메일 보내기 기능 버튼! (랜덤 정수 반환받는 파라미터)
       //해당하는value 값 특히 이메일은 값이 여러개
       //selected 선택 된값 으로 잡아줘여한다.
          var email = document.getElementById("email").value;
-         rnum=checkNum;
+		 var param = {"member_email":email};
          //value 값 저장 
          
          
          $.ajax({         //한번더 ajax 사용하요 
-            url:"<%=request.getContextPath() %>/user.do", //컨트롤러 활용하여
+            url:"/YORIZORI/check/emailcheck", //컨트롤러 활용하여
             type:"post",         // post방식
             datatype:"json",      //datatype
-            data:{"command":"sendEmail","email":email, "random":checkNum},   //ajax 에서 컨트롤러=샌드이메일 로 이동 (리시버=이베일 & 랜덤=체크넘 가지고)
+            data:JSON.stringify(param),   //ajax 에서 컨트롤러=샌드이메일 로 이동 (리시버=이베일 & 랜덤=체크넘 가지고)
+            contentType: "application/json",
             success: function (data) {
-               alert("전송성공! \n인증번호를 확인해주세요. ");
+            	var key = data.rnum;
+            	rnum = "";
+            	for(i in key){
+            		rnum +=key[i];
+            		
+            	}
+               alert("인증번호를 확인해주세요.");
             },
             error: function(err) {
-               alert("해당 이메일 전송 실패");
+               alert("이메일을 확인해 주세요.");
             }
              
          });
@@ -233,7 +240,7 @@
             <td class="col"><span style="color: #F5A9A9;">&bullet;</span>비밀번호 확인 : </td><td> <input type="password" id="pwchk" placeholder="비밀번호를 다시 입력해 주세요"></td>
 </tr>
 <tr>
-            <td class="col"><span style="color: #F5A9A9;">&bullet;</span>이메일 : </td> <td> <input type="text" id="email" name="email" placeholder="이메일을 입력해 주세요"></td><td><input type="button" value="본인인증" class="userBtn" onclick="emailCheck('<%=getRandom()%>');"></td>
+            <td class="col"><span style="color: #F5A9A9;">&bullet;</span>이메일 : </td> <td> <input type="text" id="email" name="email" placeholder="이메일을 입력해 주세요"></td><td><input type="button" value="본인인증" class="userBtn" onclick="emailCheck();"></td>
 </tr>
 <tr>
             <td class="col"><span style="color: #F5A9A9;">&nbsp;</span>인증번호 확인 : </td> <td> <input type="text" id="chkAuth" placeholder="인증번호를 입력해 주세요"></td><td><input type="button" value="인증확인" class="userBtn" onclick="chkAuth1()"></td>

@@ -292,6 +292,8 @@
         <source src="resources/img/main/main_video.mp4" type="video/mp4">
     </video>
   <%@ include file="form/footer.jsp" %>
+  
+  <a href="/YORIZORI/test/">테스트화면</a>
 </body>
 
 </html>

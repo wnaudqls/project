@@ -28,6 +28,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			request.getRequestURI().contains("/YORIZORI/broadcastlist")
 			||request.getRequestURI().contains("/YORIZORI/signup")
 			||request.getRequestURI().contains("/YORIZORI/check/")
+			||request.getRequestURI().contains("/YORIZORI/test/")
 			||(request.getSession().getAttribute("login")!=null)) 
 		
 		{

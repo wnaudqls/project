@@ -51,6 +51,8 @@ ON DELETE CASCADE
 		
 	
 
+		delete from RECIPE
+		
 		SELECT *
 		FROM RECIPE 
 		WHERE RECIPE_NO NOT IN
